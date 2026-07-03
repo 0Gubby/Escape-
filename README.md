@@ -24,39 +24,48 @@ end
 -- =========================================================================
 -- THEME CONFIGURATIONS (NEONBLUE COMPACT PRESET)
 -- =========================================================================
-Fluent:RegisterCustomTheme("NeonBlue", {
+local UIColors = {
+    MainBG = Color3.fromRGB(13, 15, 22),
+    ElementBG = Color3.fromRGB(24, 28, 38),
+    Border = Color3.fromRGB(40, 48, 64),
     Accent = Color3.fromRGB(0, 212, 191),
-    AcrylicMain = Color3.fromRGB(13, 15, 22),       
-    AcrylicBorder = Color3.fromRGB(40, 48, 64),
-    AcrylicGradient = ColorSequence.new(Color3.fromRGB(13, 15, 22), Color3.fromRGB(18, 21, 30)),
+    Text = Color3.fromRGB(245, 247, 250),
+    SubText = Color3.fromRGB(135, 145, 162)
+}
+
+Fluent:RegisterCustomTheme("NeonBlue", {
+    Accent = UIColors.Accent,
+    AcrylicMain = UIColors.MainBG,       
+    AcrylicBorder = UIColors.Border,
+    AcrylicGradient = ColorSequence.new(UIColors.MainBG, Color3.fromRGB(18, 21, 30)),
     AcrylicNoise = 0.6,
-    TitleBarLine = Color3.fromRGB(40, 48, 64),
+    TitleBarLine = UIColors.Border,
     Tab = Color3.fromRGB(18, 21, 30),
-    Element = Color3.fromRGB(24, 28, 38),
-    ElementBorder = Color3.fromRGB(40, 48, 64),
+    Element = UIColors.ElementBG,
+    ElementBorder = UIColors.Border,
     InElementBorder = Color3.fromRGB(32, 38, 52),
     ElementTransparency = 0.85,
     ToggleSlider = Color3.fromRGB(32, 38, 52),
-    ToggleToggled = Color3.fromRGB(0, 212, 191),
+    ToggleToggled = UIColors.Accent,
     SliderRail = Color3.fromRGB(32, 38, 52),
     DropdownFrame = Color3.fromRGB(18, 21, 30),
-    DropdownHolder = Color3.fromRGB(13, 15, 22),
-    DropdownBorder = Color3.fromRGB(40, 48, 64),
-    DropdownOption = Color3.fromRGB(24, 28, 38),
-    Keybind = Color3.fromRGB(24, 28, 38),
-    Input = Color3.fromRGB(24, 28, 38),
+    DropdownHolder = UIColors.MainBG,
+    DropdownBorder = UIColors.Border,
+    DropdownOption = UIColors.ElementBG,
+    Keybind = UIColors.ElementBG,
+    Input = UIColors.ElementBG,
     InputFocused = Color3.fromRGB(18, 21, 30),
-    InputIndicator = Color3.fromRGB(0, 212, 191),
+    InputIndicator = UIColors.Accent,
     Dialog = Color3.fromRGB(18, 21, 30),
-    DialogHolder = Color3.fromRGB(13, 15, 22),
-    DialogHolderLine = Color3.fromRGB(40, 48, 64),
-    DialogButton = Color3.fromRGB(24, 28, 38),
-    DialogButtonBorder = Color3.fromRGB(40, 48, 64),
-    DialogBorder = Color3.fromRGB(40, 48, 64),
-    DialogInput = Color3.fromRGB(24, 28, 38),
-    DialogInputLine = Color3.fromRGB(0, 212, 191),
-    Text = Color3.fromRGB(245, 247, 250),
-    SubText = Color3.fromRGB(135, 145, 162),
+    DialogHolder = UIColors.MainBG,
+    DialogHolderLine = UIColors.Border,
+    DialogButton = UIColors.ElementBG,
+    DialogButtonBorder = UIColors.Border,
+    DialogBorder = UIColors.Border,
+    DialogInput = UIColors.ElementBG,
+    DialogInputLine = UIColors.Accent,
+    Text = UIColors.Text,
+    SubText = UIColors.SubText,
     Hover = Color3.fromRGB(32, 38, 52),
     HoverChange = 0.05,
     ShineEnabled = true,
@@ -64,38 +73,40 @@ Fluent:RegisterCustomTheme("NeonBlue", {
         Speed = 0.5,
         RotationSpeed = 25,
         ColorSequence = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 48, 64)),
-            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 212, 191)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 48, 64)),
+            ColorSequenceKeypoint.new(0, UIColors.Border),
+            ColorSequenceKeypoint.new(0.5, UIColors.Accent),
+            ColorSequenceKeypoint.new(1, UIColors.Border),
         }),
     },
     StrokeShine = true,
-    StrokeDark = Color3.fromRGB(40, 48, 64),
+    StrokeDark = UIColors.Border,
     ButtonGradient = {
         Background = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(24, 28, 38)),
+            ColorSequenceKeypoint.new(0, UIColors.ElementBG),
             ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 21, 30)),
         }),
         Stroke = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 48, 64)),
-            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 212, 191)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 48, 64)),
+            ColorSequenceKeypoint.new(0, UIColors.Border),
+            ColorSequenceKeypoint.new(0.5, UIColors.Accent),
+            ColorSequenceKeypoint.new(1, UIColors.Border),
         }),
     },
 })
 
--- [[ 3. CREATE INITIAL WINDOW OVERLAY WITH EXPANDED X-AXIS FOR TEXT ]]
+local CustomIconURL = "https://www.roblox.com/asset-thumbnail/image?assetId=103744621667632&width=420&height=420&format=png"
+
+-- [[ 3. CREATE WINDOW ]]
 local Window = Fluent:CreateWindow({
     Title = "GUBBY TEAM HUB",
     SubTitle = "by Gubby_scripter",
-    TabWidth = 135,                    -- Expanded tab strip area width to prevent text overflow
-    Size = UDim2.fromOffset(500, 390), -- Increased panel horizontal width to 500 pixels so profile name displays fully
+    TabWidth = 135,                    
+    Size = UDim2.fromOffset(500, 390), 
     Acrylic = false,                   
     Theme = "NeonBlue",
     MinimizeKey = Enum.KeyCode.LeftControl,
     Search = false, 
-    Icons = "solar/planet-bold",
-    TitleIcon = "solar/planet-bold",
+    Icons = CustomIconURL,       
+    TitleIcon = CustomIconURL,   
     UserInfoTop = true, 
     UserInfoTitle = LocalPlayer.DisplayName or LocalPlayer.Name
 })
@@ -103,90 +114,64 @@ local Window = Fluent:CreateWindow({
 -- [[ 4. SCRIPT ENTRYS ROUTER ASSIGNMENTS ]]
 Tabs.Scripts = Window:AddTab({ Title = "Scripts", Icon = "code" })
 
--- =========================================================================
--- PLACING SEARCH COMPONENT AT THE VERY TOP OF THE SCRIPTS ELEMENT ORDER
--- =========================================================================
-local searchContainer = {}
-
-Tabs.Scripts:AddInput("ScriptSearch", {
-    Title = "Search Scripts",
-    Placeholder = "Type game name to filter...",
-    Numeric = false,
-    Finished = false,
-    Callback = function(Value)
-        local query = string.lower(Value)
-        for _, item in ipairs(searchContainer) do
-            if query == "" or string.find(string.lower(item.Name), query) then
-                item.Element.Frame.Visible = true
-                if item.ImageLabel then item.ImageLabel.Visible = true end
-            else
-                item.Element.Frame.Visible = false
-                if item.ImageLabel then item.ImageLabel.Visible = false end
-            end
-        end
-    end
-})
-
-Tabs.Scripts:AddParagraph({
-    Title = "Available Exploits",
-    Content = "Select a game variant below to run automated functions."
-})
+-- Forward declare the ScreenGui reference so the button can clean up the mobile toggle button too
+local ScreenGui = nil
 
 -- =========================================================================
--- IMAGE CARD CREATION LOGIC WITH AUTO-ARRANGEMENT HANDLERS
+-- IMAGE CARD GENERATION & FULL CLEANUP LOGIC
 -- =========================================================================
 local function addGameShortcutWithCard(name, url, universeId)
     local btn = Tabs.Scripts:AddButton({
-        Title = name,
-        Description = "Tap to execute code matrix safely",
+        Title = "Execute Script",
+        Description = "Game: " .. name,
         Callback = function()
+            -- 1. Run script payload first
             RunScript(url)
             Notify("Executing", "Loading entry script data for " .. name, "Info", "code", 2)
+            
+            -- 2. Completely delete the mobile button container if it exists
+            if ScreenGui then
+                ScreenGui:Destroy()
+            end
+            
+            -- 3. Completely delete the main GUI Hub window from existence
+            Window:Destroy() 
         end
     })
 
-    local targetContainer = btn.Frame and btn.Frame.Parent
-    local imgLabel = nil
-    
-    if targetContainer then
-        imgLabel = Instance.new("ImageLabel")
+    local targetFrame = btn.Frame
+    if targetFrame and targetFrame:IsA("GuiObject") then
+        targetFrame.Size = UDim2.new(targetFrame.Size.X.Scale, targetFrame.Size.X.Offset, 0, 145)
+        
+        local imgLabel = Instance.new("ImageLabel")
+        imgLabel.Name = "CardPreviewImage"
         imgLabel.Size = UDim2.new(1, -20, 0, 85) 
-        imgLabel.BackgroundColor3 = Color3.fromRGB(24, 28, 38)
+        imgLabel.Position = UDim2.new(0, 10, 0, 50) 
+        imgLabel.BackgroundColor3 = UIColors.MainBG
         imgLabel.BorderSizePixel = 0
         imgLabel.ClipsDescendants = true
-        
-        if btn.Frame:IsA("GuiObject") then
-            -- Layout assignment ensures images lock natively direct above corresponding buttons
-            imgLabel.LayoutOrder = btn.Frame.LayoutOrder - 1
-        end
         
         if universeId and type(universeId) == "number" then
             imgLabel.Image = "https://www.roblox.com/asset-thumbnail/image?assetId=" .. tostring(universeId) .. "&width=768&height=432&format=png"
         else
-            imgLabel.Image = "rbxassetid://12543132717" 
+            imgLabel.Image = "rbxassetid://126071415712760" 
         end
         
         imgLabel.ScaleType = Enum.ScaleType.Crop
-        imgLabel.Parent = targetContainer
+        imgLabel.Parent = targetFrame
         
         local round = Instance.new("UICorner")
         round.CornerRadius = UDim.new(0, 6)
         round.Parent = imgLabel
         
         local stroke = Instance.new("UIStroke")
-        stroke.Color = Color3.fromRGB(40, 48, 64)
+        stroke.Color = UIColors.Border
         stroke.Thickness = 1
         stroke.Parent = imgLabel
     end
-
-    table.insert(searchContainer, {
-        Name = name,
-        Element = btn,
-        ImageLabel = imgLabel
-    })
 end
 
--- Injecting entry elements into the layout queue directly below the search header
+-- Appending lists down structural scroll frame queues
 addGameShortcutWithCard("Fårup Sommerland", "https://pastefy.app/oyr9IO6j/raw", 100084571809362)
 addGameShortcutWithCard("Hex Mall", "https://pastefy.app/zWMuL9zp/raw", 131807993575629)
 addGameShortcutWithCard("Extra Easy Obby", "https://pastefy.app/qvoiJPW9/raw", nil)
@@ -208,7 +193,7 @@ Tabs.Feedback = Window:AddTab({ Title = "Feedback", Icon = "mail" })
 local feedbackInput = ""
 Tabs.Feedback:AddInput("FeedbackBox", {
     Title = "Message Body",
-    Placeholder = "Type system messages or bugs here...",
+    Placeholder = "Type message here",
     Numeric = false,
     Finished = false,
     Callback = function(Value)
@@ -220,7 +205,7 @@ local WEBHOOK_URL = "https://discord.com/api/webhooks/1515737371486851213/pgvsX7
 
 Tabs.Feedback:AddButton({
     Title = "SUBMIT FEEDBACK",
-    Description = "Routes directly to system webhook logs",
+    Description = "sent message to feedback channels in discord",
     Callback = function()
         if feedbackInput == "" then 
             Notify("Error", "Message body context empty!", "Error", "alert-triangle", 3)
@@ -266,7 +251,7 @@ if TargetParent:FindFirstChild("GubbyMobileMinimize") then
     TargetParent.GubbyMobileMinimize:Destroy()
 end
 
-local ScreenGui = Instance.new("ScreenGui")
+ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "GubbyMobileMinimize"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -276,15 +261,15 @@ local MinimizeBtn = Instance.new("TextButton")
 MinimizeBtn.Name = "Toggle"
 MinimizeBtn.Size = UDim2.fromOffset(50, 50)
 MinimizeBtn.Position = UDim2.new(0.05, 0, 0.25, 0)
-MinimizeBtn.BackgroundColor3 = Color3.fromRGB(13, 15, 22)
-MinimizeBtn.TextColor3 = Color3.fromRGB(0, 212, 191)
-MinimizeBtn.TextSize = 12
+MinimizeBtn.BackgroundColor3 = UIColors.MainBG
+MinimizeBtn.TextColor3 = UIColors.Accent
+MinimizeBtn.TextSize = 24  
 MinimizeBtn.Font = Enum.Font.GothamBold
-MinimizeBtn.Text = "MENU"
+MinimizeBtn.Text = "🐰"  
 MinimizeBtn.Parent = ScreenGui
 
 local UIStroke = Instance.new("UIStroke")
-UIStroke.Color = Color3.fromRGB(40, 48, 64)
+UIStroke.Color = UIColors.Border
 UIStroke.Thickness = 2
 UIStroke.Parent = MinimizeBtn
 
@@ -329,4 +314,4 @@ UserInputService.InputChanged:Connect(function(input)
 end)
 
 Window:SelectTab(1)
-Notify("Script Loaded", "Resolution optimized. Top-level search field deployed.", "Info", "solar/planet-bold", 5)
+Notify("Script Loaded", "Welcome to Gubby Team Hub.", "Info", "code", 5)
