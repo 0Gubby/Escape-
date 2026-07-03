@@ -93,7 +93,7 @@ Fluent:RegisterCustomTheme("NeonBlue", {
     },
 })
 
-local CustomIconURL = "https://www.roblox.com/asset-thumbnail/image?assetId=103744621667632&width=420&height=420&format=png"
+local CustomIconURL = "https://www.roblox.com/asset-thumbnail/image?assetId=139410134457121&width=420&height=420&format=png"
 
 -- [[ 3. CREATE WINDOW ]]
 local Window = Fluent:CreateWindow({
